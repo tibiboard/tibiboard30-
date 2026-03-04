@@ -37,3 +37,6 @@
         vib0 = &vibe_pin;
     };
 };
+&xiao_serial {
+    status = "disabled";
+};
