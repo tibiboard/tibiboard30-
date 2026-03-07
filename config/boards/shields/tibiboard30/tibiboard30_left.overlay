@@ -1,17 +1,14 @@
 #include "tibiboard30.dtsi"
-
 &kscan {
     compatible = "zmk,kscan-gpio-matrix";
     diode-direction = "col2row";
     wakeup-source;
-
     /* D0, D1, D2 を行（Row）に割り当て */
     row-gpios
         = <&xiao_d 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
         , <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
         , <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
         ;
-
     /* D3, D4, D5, D6, D7 を列（Col）に割り当て */
     col-gpios
         = <&xiao_d 3 GPIO_ACTIVE_HIGH>
@@ -21,11 +18,9 @@
         , <&xiao_d 7 GPIO_ACTIVE_HIGH>
         ;
 };
-
 &transform {
     col-offset = <0>;
 };
-
 / {
     vibrator: vibrator {
         compatible = "gpio-leds";
@@ -35,13 +30,14 @@
             label = "Vibration Motor";
         };
     };
-
     aliases {
         vib0 = &vibe_pin;
     };
 };
-
 /* D6, D7をキー入力に使うので、シリアル通信を必ず無効化 */
 &xiao_serial {
+    status = "disabled";
+};
+&qspi {
     status = "disabled";
 };
